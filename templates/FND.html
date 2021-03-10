@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Fake News Detection</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'> 
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'> 
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Predict Fake News</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="POST">
+      <!--input type="text" name="news" placeholder="Copy the url"  />-->
+      <textarea name="article" , ID='article' , rows="5" cols="50" style="font-size:12pt;height:220px;width:350px;" , placeholder="Insert here"></textarea>
+      <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+<!--{{ prediction_text }}-->
+{% if prediction_text == 1%}
+<p class='trust'><!--THIS NEWS IS 75% <p style="color:green"><b>"REAL"</b>--></p>
+ Probability of the given news being REAL is {{ proba }}
+</p>
+{% elif prediction_text == 0%}
+<p class='no_trust'><!--THIS NEWS IS 75% <p style="color:red"><b>"FAKE"</b>--></p>
+Probability of the given news being FAKE is {{ proba }}
+</p>
+{% endif %}  
+<br>
+<a href="{{ url_for('logout') }}" class="btn">Logout</a>
+ </div>
+
+
+</body>
+</html>
